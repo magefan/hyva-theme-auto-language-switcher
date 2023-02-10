@@ -1,0 +1,85 @@
+<?php
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+?>
+<?php
+/**
+ * Suggeste store template
+ *
+ * @var $block \Magefan\AutoLanguageSwitcher\Block\SuggestedStore
+ */
+
+/** @var \Magento\Framework\Escaper $escaper */
+/** @var \Hyva\Theme\Model\ViewModelRegistry $viewModels */
+/** @var \Hyva\Theme\ViewModel\Modal $modalViewModel */
+$modalViewModel = $viewModels->require(\Hyva\Theme\ViewModel\Modal::class);
+?>
+<div id="mflac-hyva-modal-popup"></div>
+<script>
+    window.addEventListener('DOMContentLoaded', function(event) {
+        function ajax(type, url, callback) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == XMLHttpRequest.DONE && xmlhttp.status == 200) {
+                    var data = xmlhttp.responseText;
+                    if (callback) callback(data);
+                }
+            };
+
+            xmlhttp.open(type, url, true);
+            xmlhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+            xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xmlhttp.send();
+        }
+
+        var ck = 'mfals-suggested-store';
+        if (!hyva.getCookie(ck)) {
+            var config = <?= $block->getConfig() ?>;
+            var url = config.api_url + "rest/V1/mfals/suggested-store?time=" + Date.now() + '&rand=' + Math.random()
+                +'&current_url=' + config.current_url;
+            ajax('GET', url, function(data) {
+                data = JSON.parse(JSON.parse(data));
+                hyva.setCookie(ck, true, 1);
+
+                if (!data.redirect_url) return;
+
+                var title = data.message ? data.message : 'Would you like to switch language?';
+                var yesLabel = data.yes_label ? data.yes_label : 'Yes';
+                var noLabel = data.no_label ? data.no_label : 'No';
+
+                var popupHtml = '\
+                    <div x-data="hyva.modal()">\
+                         <div x-cloak x-spread="overlay(\'dialog\')" class="fixed inset-0 bg-black bg-opacity-50 z-50">\
+                            <div class="fixed flex justify-center items-center text-left z-10 inset-0">\
+                                <div x-ref="dialog" role="dialog" aria-modal="true" class="inline-block bg-white shadow-xl rounded-lg p-10 max-h-screen overflow-auto">\
+                                    <div class="modal-inner-wrap mf-initial" data-role="focusable-scope" data-was-processed="true">\
+                                        <div id="the-label"><strong>' + title + '</strong><br/><br/></div>\
+                                        <div class="mt-20 flex justify-between gap-2">\
+                                            <button @click="hide" type="button" class="btn">\
+                                            ' + noLabel + '\
+                                            </button>\
+                                            <button x-focus-first id="mflac-hyva-action-accept" type="button" class="btn btn-primary">\
+                                            ' + yesLabel + '\
+                                            </button>\
+                                        </div>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <button @click="show" type="button" class="btn mt-40" id="mflac-popup-shower" style="display: none">\
+                        </button>\
+                    </div>\
+                ';
+                document.getElementById("mflac-hyva-modal-popup").innerHTML += popupHtml;
+                setTimeout(function(){
+                    document.getElementById("mflac-popup-shower").click();
+                    document.getElementById("mflac-hyva-action-accept").addEventListener("click", function() {
+                        window.location = data.redirect_url;
+                    });
+                }, 500);
+            });
+        }
+    });
+</script>
