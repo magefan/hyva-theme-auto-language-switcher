@@ -9,7 +9,7 @@
     <type name="Hyva\CompatModuleFallback\Model\CompatModuleRegistry">
         <arguments>
             <argument name="compatModules" xsi:type="array">
-                <item name="orig_module_map" xsi:type="array">
+                <item name="orig_module_map_als" xsi:type="array">
                     <item name="original_module" xsi:type="string">Magefan_AutoLanguageSwitcher</item>
                     <item name="compat_module" xsi:type="string">Hyva_MagefanAutoLanguageSwitcher</item>
                 </item>
