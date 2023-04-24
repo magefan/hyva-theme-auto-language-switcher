@@ -3,7 +3,7 @@
 [![Total Downloads](https://poser.pugx.org/magefan/hyva-theme-auto-language-switcher/downloads)](https://packagist.org/packages/magefan/hyva-theme-auto-language-switcher)
 [![Latest Stable Version](https://poser.pugx.org/magefan/hyva-theme-auto-language-switcher/v/stable)](https://packagist.org/packages/magefan/hyva-theme-auto-language-switcher)
 
-<a href="https://www.comebackalive.in.ua/donate"><img width="830" height="208" src="https://cm.magefan.com/blog/support-ukraine.png"></a>
+<a href="https://savelife.in.ua/en/donate-en/#donate-army-card-monthly"><img width="830" height="208" src="https://cm.magefan.com/blog/support-ukraine.png"></a>
 
 <img width="150" height="100" src="https://magefan.com/media/wysiwyg/made_in_ukraine.jpg">
 
