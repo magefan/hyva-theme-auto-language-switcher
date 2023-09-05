@@ -10,7 +10,7 @@
 It is an integration module between Hyva Theme and [Magento 2 Language Switcher Extension](https://magefan.com/magento-2-auto-language-switcher) by Magefan.
 
 
-<a href="https://github.com/magefan/hyva-theme-auto-language-switcher/archive/refs/heads/main.zip"><img width="190" height="70" src="https://magefan.com/media/wysiwyg/download-now_1.png"></a>
+<a href="https://github.com/magefan/hyva-theme-auto-language-switcher/archive/refs/heads/main.zip"><img width="190" height="70" src="https://cm.magefan.com/wysiwyg/products/download-magefan-extensions.png"></a>
 
 
 ## Requirements
