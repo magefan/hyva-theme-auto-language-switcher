@@ -50,14 +50,14 @@ $modalViewModel = $viewModels->require(\Hyva\Theme\ViewModel\Modal::class);
                 var noLabel = data.no_label ? data.no_label : 'No';
 
                 var popupHtml = '\
-                    <div x-data="hyva.modal()">\
-                         <div x-cloak x-spread="overlay(\'dialog\')" class="fixed inset-0 bg-black bg-opacity-50 z-50">\
+                    <div x-data="{ open: true }">\
+                         <div x-show="open" x-cloak x-spread="overlay(\'dialog\')" class="fixed inset-0 bg-black bg-opacity-50 z-50">\
                             <div class="fixed flex justify-center items-center text-left z-10 inset-0">\
                                 <div x-ref="dialog" role="dialog" aria-modal="true" class="inline-block bg-white shadow-xl rounded-lg p-10 max-h-screen overflow-auto">\
                                     <div class="modal-inner-wrap mf-initial" data-role="focusable-scope" data-was-processed="true">\
                                         <div id="the-label"><strong>' + title + '</strong><br/><br/></div>\
                                         <div class="mt-20 flex justify-between gap-2">\
-                                            <button @click="hide" type="button" class="btn">\
+                                            <button @click="open = false" type="button" class="btn">\
                                             ' + noLabel + '\
                                             </button>\
                                             <button x-focus-first id="mflac-hyva-action-accept" type="button" class="btn btn-primary">\
@@ -68,7 +68,7 @@ $modalViewModel = $viewModels->require(\Hyva\Theme\ViewModel\Modal::class);
                                 </div>\
                             </div>\
                         </div>\
-                        <button @click="show" type="button" class="btn mt-40" id="mflac-popup-shower" style="display: none">\
+                        <button @click="open = true" type="button" class="btn mt-40" id="mflac-popup-shower" style="display: none">\
                         </button>\
                     </div>\
                 ';
