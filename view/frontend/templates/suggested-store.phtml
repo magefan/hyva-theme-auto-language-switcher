@@ -38,7 +38,7 @@ $modalViewModel = $viewModels->require(\Hyva\Theme\ViewModel\Modal::class);
         if (!hyva.getCookie(ck)) {
             var config = <?= $block->getConfig() ?>;
             var url = config.api_url + "rest/V1/mfals/suggested-store?time=" + Date.now() + '&rand=' + Math.random()
-                +'&current_url=' + config.current_url;
+                +'&current_url=' + encodeURIComponent(config.current_url);
             ajax('GET', url, function(data) {
                 data = JSON.parse(JSON.parse(data));
                 hyva.setCookie(ck, true, 1);
